@@ -26,6 +26,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        conda --version
         pip install flake8 pytest scikit-bio biom-format pandas numpy
         python setup.py install
         pip install qiime
