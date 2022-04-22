@@ -25,11 +25,13 @@ jobs:
         python-version: "3.10"
     - name: Install dependencies
       run: |
+        wget https://data.qiime2.org/distro/core/qiime2-2022.4-py38-osx-conda.yml
+        conda env create -n qiime2-2022.4 --file qiime2-2022.4-py38-osx-conda.yml
+        rm qiime2-2022.4-py38-osx-conda.yml
+        conda activate qiime2-2022.4
         python -m pip install --upgrade pip
-        conda --version
         pip install flake8 pytest scikit-bio biom-format pandas numpy
         python setup.py install
-        pip install qiime
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
