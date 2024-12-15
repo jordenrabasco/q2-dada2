@@ -20,7 +20,7 @@ import q2_dada2._examples as ex
 from ._dada_stats import (stats_viz)
 
 _POOL_OPT = {'pseudo', 'independent'}
-_CHIM_OPT = {'pooled', 'consensus', 'none'}
+_CHIM_OPT = {'consensus', 'none'}
 
 plugin = qiime2.plugin.Plugin(
     name='dada2',
@@ -91,8 +91,7 @@ plugin.methods.register_function(
         ),
         'chimera_method': ('The method used to remove chimeras. '
                            '"none": No chimera removal is performed. '
-                           '"pooled": All reads are pooled prior to chimera '
-                           'detection. "consensus": Chimeras are detected in '
+                           '"consensus": Chimeras are detected in '
                            'samples individually, and sequences found '
                            'chimeric in a sufficient fraction of samples are '
                            'removed.'),
@@ -224,8 +223,7 @@ plugin.methods.register_function(
                            'ASVs and thus higher sensitivity to those ASVs.'),
         'chimera_method': ('The method used to remove chimeras. '
                            '"none": No chimera removal is performed. '
-                           '"pooled": All reads are pooled prior to chimera '
-                           'detection. "consensus": Chimeras are detected in '
+                           '"consensus": Chimeras are detected in '
                            'samples individually, and sequences found '
                            'chimeric in a sufficient fraction of samples are '
                            'removed.'),
@@ -336,8 +334,7 @@ plugin.methods.register_function(
                           'ASVs and thus higher sensitivity to those ASVs.',
         'chimera_method': 'The method used to remove chimeras. '
                           '"none": No chimera removal is performed. '
-                          '"pooled": All reads are pooled prior to chimera '
-                          'detection. "consensus": Chimeras are detected in '
+                          '"consensus": Chimeras are detected in '
                           'samples individually, and sequences found '
                           'chimeric in a sufficient fraction of samples are '
                           'removed.',
@@ -474,8 +471,7 @@ plugin.methods.register_function(
                           'ASVs and thus higher sensitivity to those ASVs.',
         'chimera_method': 'The method used to remove chimeras. '
                           '"none": No chimera removal is performed. '
-                          '"pooled": All reads are pooled prior to chimera '
-                          'detection. "consensus": Chimeras are detected in '
+                          '"consensus": Chimeras are detected in '
                           'samples individually, and sequences found chimeric '
                           'in a sufficient fraction of samples are removed.',
         'min_fold_parent_over_abundance':
