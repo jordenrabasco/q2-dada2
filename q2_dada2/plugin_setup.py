@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------
-# Copyright (c) 2016-2023, QIIME 2 development team.
+# Copyright (c) 2016-2025, QIIME 2 development team.
 #
 # Distributed under the terms of the Modified BSD License.
 #
@@ -22,6 +22,7 @@ from ._dada_stats import (stats_viz)
 _POOL_OPT = {'pseudo', 'independent'}
 _CHIM_OPT = {'consensus', 'none'}
 
+citations = qiime2.plugin.Citations.load('citations.bib', package='q2_dada2')
 plugin = qiime2.plugin.Plugin(
     name='dada2',
     version=q2_dada2.__version__,
@@ -31,7 +32,7 @@ plugin = qiime2.plugin.Plugin(
                  'sequence quality control for single-end and paired-end '
                  'reads using the DADA2 R library.'),
     short_description='Plugin for sequence quality control with DADA2.',
-    citations=qiime2.plugin.Citations.load('citations.bib', package='q2_dada2')
+    citations=[citations['callahan2016dada2']]
 )
 
 
@@ -515,7 +516,8 @@ plugin.methods.register_function(
     description='This method denoises single-end Pacbio CCS sequences, '
                 'dereplicates them, and filters chimeras. '
                 'Tutorial and workflow: '
-                'https://github.com/benjjneb/LRASManuscript'
+                'https://github.com/benjjneb/LRASManuscript',
+    citations=[citations['callahan2019dada2ccs']]
 )
 
 plugin.visualizers.register_function(
