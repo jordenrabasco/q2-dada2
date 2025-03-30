@@ -8,4 +8,5 @@
 
 from ._visualizer import stats_viz
 
+
 __all__ = ['stats_viz']

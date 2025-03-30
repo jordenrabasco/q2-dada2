@@ -540,15 +540,11 @@ class TestVizualization(TestPluginBase):
 
     def setUp(self):
         super().setUp()
-        self.stats_table = {'Denoised_Read_Stats': qiime2.Metadata.load(
-            self.get_data_path('expected/single-default-stats.tsv')),
-            'Error_Plot_Stats': qiime2.Metadata.load(
-                self.get_data_path('expected/single-default-error-stats.tsv'))}
+        self.stats_table = qiime2.Metadata.load(
+                self.get_data_path('expected/single-default-error-stats.tsv'))
 
-        self.paired_stats_table = {'Denoised_Read_Stats': qiime2.Metadata.load(
-            self.get_data_path('expected/paired-default-stats.tsv')),
-            'Error_Plot_Stats':  qiime2.Metadata.load(
-                self.get_data_path('expected/paired-default-error-stats.tsv'))}
+        self.paired_stats_table = qiime2.Metadata.load(
+                self.get_data_path('expected/paired-default-error-stats.tsv'))
 
         self.output_dir_obj = tempfile.TemporaryDirectory(
             prefix='q2-dada2-stats-test-temp-')
@@ -560,10 +556,6 @@ class TestVizualization(TestPluginBase):
     def assertStat_Viz_Basics(self, viz_dir, single_or_paired):
         index_fp = os.path.join(viz_dir, 'index.html')
         self.assertTrue(os.path.exists(index_fp))
-        with open(index_fp, 'r') as fh:
-            index_contents = fh.read()
-        self.assertIn('./denoise_stats.html', index_contents)
-        self.assertIn('./error_plot_stats.html', index_contents)
         if single_or_paired is True:
             self.assertTrue(
                 os.path.exists(os.path.join(viz_dir, 'error_graph.png')))
