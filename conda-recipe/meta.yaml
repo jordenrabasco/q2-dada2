@@ -17,6 +17,7 @@ requirements:
   - bioconductor-dada2
   - matplotlib >=3.8.4
   - seaborn >=0.12.2
+  - q2templates {{ qiime2_epoch }}.*
   - r-base {{ r_base }}
   - r-optparse >=1.7.1
   - openjdk
