@@ -20,3 +20,16 @@ class DADA2StatsFormat(model.TextFileFormat):
 
 DADA2StatsDirFmt = model.SingleFileDirectoryFormat(
     'DADA2StatsDirFmt', 'stats.tsv', DADA2StatsFormat)
+
+
+DADA2ErrorStats = SemanticType('DADA2ErrorStats',
+                               variant_of=SampleData.field['type'])
+
+
+class DADA2ErrorStatsFormat(model.TextFileFormat):
+    def validate(*args):
+        pass
+
+
+DADA2StatsDirFmt = model.SingleFileDirectoryFormat(
+    'DADA2StatsDirFmt', 'stats.tsv', DADA2ErrorStatsFormat)
