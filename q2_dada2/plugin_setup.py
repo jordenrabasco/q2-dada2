@@ -523,7 +523,7 @@ plugin.methods.register_function(
 plugin.visualizers.register_function(
     function=stats_viz,
     inputs={
-        'dada2_stats': SampleData[DADA2Stats]
+        'dada2_error_stats': SampleData[DADA2Stats]
     },
     parameters={'nominalq': qiime2.plugin.Bool,
                 'error_in': qiime2.plugin.Bool,
@@ -531,7 +531,7 @@ plugin.visualizers.register_function(
     name='DADA2 diagnostic statistics',
     description='Generates dada2 output stat vizualizations',
     input_descriptions={
-        'dada2_stats': 'Error output from stats from dada2 denoising ',
+        'dada2_error_stats': 'Error output from stats from dada2 denoising ',
     },
     parameter_descriptions={'nominalq':
                             'Sets the nominalq line of the vizualization',

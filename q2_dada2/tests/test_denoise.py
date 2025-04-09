@@ -62,8 +62,8 @@ class TestDenoiseSingle(TestPluginBase):
         table, rep_seqs, md = denoise_single(self.demux_seqs, 100)
         self.assertEqual(_sort_table(table), _sort_table(exp_table))
         self.assertEqual(_sort_seqs(rep_seqs), _sort_seqs(exp_rep_seqs))
-        read_stats_md = dict(md)["Denoised_Read_Stats"]
-        error_model_md = dict(md)["Error_Plot_Stats"]
+        read_stats_md = dict(md)["denoised-read-stats"]
+        error_model_md = dict(md)["error-plot-stats"]
         self.assertEqual(read_stats_md, exp_md)
         self.assertEqual(
             error_model_md.to_dataframe().replace('', pd.NA, inplace=True),
@@ -92,8 +92,8 @@ class TestDenoiseSingle(TestPluginBase):
         self.assertEqual(_sort_table(table), _sort_table(exp_table))
         self.assertEqual(_sort_seqs(rep_seqs),
                          _sort_seqs(exp_rep_seqs))
-        read_stats_md = dict(md)["Denoised_Read_Stats"]
-        error_model_md = dict(md)["Error_Plot_Stats"]
+        read_stats_md = dict(md)["denoised-read-stats"]
+        error_model_md = dict(md)["error-plot-stats"]
         self.assertEqual(read_stats_md, exp_md)
         self.assertEqual(
             error_model_md.to_dataframe().replace('', pd.NA, inplace=True),
@@ -157,8 +157,8 @@ class TestDenoiseSingle(TestPluginBase):
         self.assertEqual(_sort_table(table), _sort_table(exp_table))
         self.assertEqual(_sort_seqs(rep_seqs),
                          _sort_seqs(exp_rep_seqs))
-        read_stats_md = dict(md)["Denoised_Read_Stats"]
-        error_model_md = dict(md)["Error_Plot_Stats"]
+        read_stats_md = dict(md)["denoised-read-stats"]
+        error_model_md = dict(md)["error-plot-stats"]
         self.assertEqual(read_stats_md, exp_md)
         self.assertEqual(
             error_model_md.to_dataframe().replace('', pd.NA, inplace=True),
@@ -184,8 +184,8 @@ class TestDenoiseSingle(TestPluginBase):
         self.assertEqual(_sort_seqs(rep_seqs),
                          _sort_seqs(exp_rep_seqs))
 
-        read_stats_md = dict(md)["Denoised_Read_Stats"]
-        error_model_md = dict(md)["Error_Plot_Stats"]
+        read_stats_md = dict(md)["denoised-read-stats"]
+        error_model_md = dict(md)["error-plot-stats"]
         self.assertEqual(read_stats_md, exp_md)
         self.assertEqual(
             error_model_md.to_dataframe().replace('', pd.NA, inplace=True),
@@ -211,8 +211,8 @@ class TestDenoiseSingle(TestPluginBase):
         self.assertEqual(_sort_seqs(rep_seqs),
                          _sort_seqs(exp_rep_seqs))
 
-        read_stats_md = dict(md)["Denoised_Read_Stats"]
-        error_model_md = dict(md)["Error_Plot_Stats"]
+        read_stats_md = dict(md)["denoised-read-stats"]
+        error_model_md = dict(md)["error-plot-stats"]
         self.assertEqual(read_stats_md, exp_md)
         self.assertEqual(
             error_model_md.to_dataframe().replace('', pd.NA, inplace=True),
@@ -245,8 +245,8 @@ class TestDenoisePaired(TestPluginBase):
         self.assertEqual(_sort_table(table), _sort_table(exp_table))
         self.assertEqual(_sort_seqs(rep_seqs),
                          _sort_seqs(exp_rep_seqs))
-        read_stats_md = dict(md)["Denoised_Read_Stats"]
-        error_model_md = dict(md)["Error_Plot_Stats"]
+        read_stats_md = dict(md)["denoised-read-stats"]
+        error_model_md = dict(md)["error-plot-stats"]
         self.assertEqual(read_stats_md, exp_md)
         self.assertEqual(
             error_model_md.to_dataframe().replace('', pd.NA, inplace=True),
@@ -272,8 +272,8 @@ class TestDenoisePaired(TestPluginBase):
         self.assertEqual(_sort_table(table), _sort_table(exp_table))
         self.assertEqual(_sort_seqs(rep_seqs),
                          _sort_seqs(exp_rep_seqs))
-        read_stats_md = dict(md)["Denoised_Read_Stats"]
-        error_model_md = dict(md)["Error_Plot_Stats"]
+        read_stats_md = dict(md)["denoised-read-stats"]
+        error_model_md = dict(md)["error-plot-stats"]
         self.assertEqual(read_stats_md, exp_md)
         self.assertEqual(
             error_model_md.to_dataframe().replace('', pd.NA, inplace=True),
@@ -303,8 +303,8 @@ class TestDenoisePaired(TestPluginBase):
         self.assertEqual(_sort_table(table), _sort_table(exp_table))
         self.assertEqual(_sort_seqs(rep_seqs),
                          _sort_seqs(exp_rep_seqs))
-        read_stats_md = dict(md)["Denoised_Read_Stats"]
-        error_model_md = dict(md)["Error_Plot_Stats"]
+        read_stats_md = dict(md)["denoised-read-stats"]
+        error_model_md = dict(md)["error-plot-stats"]
         self.assertEqual(read_stats_md, exp_md)
         self.assertEqual(
             error_model_md.to_dataframe().replace('', pd.NA, inplace=True),
@@ -367,8 +367,8 @@ class TestDenoisePaired(TestPluginBase):
         self.assertEqual(_sort_table(table), _sort_table(exp_table))
         self.assertEqual(_sort_seqs(rep_seqs),
                          _sort_seqs(exp_rep_seqs))
-        read_stats_md = dict(md)["Denoised_Read_Stats"]
-        error_model_md = dict(md)["Error_Plot_Stats"]
+        read_stats_md = dict(md)["denoised-read-stats"]
+        error_model_md = dict(md)["error-plot-stats"]
         self.assertEqual(read_stats_md, exp_md)
         self.assertEqual(
             error_model_md.to_dataframe().replace('', pd.NA, inplace=True),
@@ -407,8 +407,8 @@ class TestDenoisePyro(TestPluginBase):
             exp_table.sort_order(table.ids('observation'), axis='observation'))
         self.assertEqual(_sort_seqs(rep_seqs),
                          _sort_seqs(exp_rep_seqs))
-        read_stats_md = dict(md)["Denoised_Read_Stats"]
-        error_model_md = dict(md)["Error_Plot_Stats"]
+        read_stats_md = dict(md)["denoised-read-stats"]
+        error_model_md = dict(md)["error-plot-stats"]
         self.assertEqual(read_stats_md, exp_md)
         self.assertEqual(
             error_model_md.to_dataframe().replace('', pd.NA, inplace=True),
@@ -481,8 +481,8 @@ class TestDenoiseCCS(TestPluginBase):
             )
         )
         self.assertEqual(_sort_seqs(rep_seqs), _sort_seqs(exp_rep_seqs))
-        read_stats_md = dict(md)["Denoised_Read_Stats"]
-        error_model_md = dict(md)["Error_Plot_Stats"]
+        read_stats_md = dict(md)["denoised-read-stats"]
+        error_model_md = dict(md)["error-plot-stats"]
         df_err_md = \
             error_model_md.to_dataframe().replace('', pd.NA, inplace=True)
         df_err_exp_md = \
@@ -525,8 +525,8 @@ class TestDenoiseCCS(TestPluginBase):
             )
         )
         self.assertEqual(_sort_seqs(rep_seqs), _sort_seqs(exp_rep_seqs))
-        read_stats_md = dict(md)["Denoised_Read_Stats"]
-        error_model_md = dict(md)["Error_Plot_Stats"]
+        read_stats_md = dict(md)["denoised-read-stats"]
+        error_model_md = dict(md)["error-plot-stats"]
         df_err_md = \
             error_model_md.to_dataframe().replace('', pd.NA, inplace=True)
         df_err_exp_md = \
@@ -569,12 +569,12 @@ class TestVizualization(TestPluginBase):
 
     def test_defaults(self):
         stats_viz(output_dir=self.output_dir,
-                  dada2_stats=self.stats_table)
+                  dada2_error_stats=self.stats_table)
         self.assertStat_Viz_Basics(self.output_dir, True)
 
     def test_paired_defaults(self):
         stats_viz(output_dir=self.output_dir,
-                  dada2_stats=self.paired_stats_table)
+                  dada2_error_stats=self.paired_stats_table)
         self.assertStat_Viz_Basics(self.output_dir, False)
 
 

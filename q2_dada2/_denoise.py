@@ -22,22 +22,7 @@ from q2_types.feature_data import DNAIterator
 from q2_types.per_sample_sequences import (
     SingleLanePerSampleSingleEndFastqDirFmt,
     SingleLanePerSamplePairedEndFastqDirFmt)
-
-# from qiime2.plugin.util import run_commands
-
-
-def run_commands(cmds, verbose=True):
-    if verbose:
-        print("Running external command line application(s). This may print "
-              "messages to stdout and/or stderr.")
-        print("The command(s) being run are below. These commands cannot "
-              "be manually re-run as they will depend on temporary files that "
-              "no longer exist.")
-    for cmd in cmds:
-        if verbose:
-            print("\nCommand:", end=' ')
-            print(" ".join(cmd), end='\n\n')
-        subprocess.run(cmd, check=True)
+from qiime2.plugin.util import run_commands
 
 
 def _check_featureless_table(fp):
@@ -210,8 +195,8 @@ def _denoise_helper(biom_fp, track_fp, err_track_fp,
              for id_ in table.ids(axis='observation')))
 
     # initalize and populate DADA2 diagnoistic Stats dictionary
-    return table, rep_sequences, {"Denoised_Read_Stats": metadata,
-                                  "Error_Plot_Stats": metadata_err}
+    return table, rep_sequences, {"denoised-read-stats": metadata,
+                                  "error-plot-stats": metadata_err}
 
 
 def _denoise_single(demultiplexed_seqs, trunc_len, trim_left, max_ee, trunc_q,

@@ -57,7 +57,7 @@ def _plot_errors(transdf, image_paths_arr, output_dir,
     return image_paths_arr  # pass back path to image
 
 
-def stats_viz(output_dir: str, dada2_stats: qiime2.Metadata,
+def stats_viz(output_dir: str, dada2_error_stats: qiime2.Metadata,
               nominalq: bool = False, error_in: bool = False,
               error_out: bool = True):
 
@@ -67,7 +67,7 @@ def stats_viz(output_dir: str, dada2_stats: qiime2.Metadata,
     # initalize data structures for passing to html
     image_paths_arr = []
     paired_or_not = ''
-    temp_df = dada2_stats.to_dataframe()
+    temp_df = dada2_error_stats.to_dataframe()
     # determines if the reads are paired
     if len(temp_df.columns.tolist()) > 12:
         df_fwd_subset = temp_df.iloc[:, :10]
