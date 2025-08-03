@@ -7,7 +7,8 @@
 # ----------------------------------------------------------------------------
 
 from ._denoise import denoise_single, denoise_paired, denoise_pyro, denoise_ccs
-from ._stats import DADA2Stats, DADA2StatsDirFmt, DADA2StatsFormat
+from ._stats import DADA2Stats, DADA2StatsDirFmt, DADA2StatsFormat, \
+    DADA2ErrorStats, DADA2ErrorStatsFormat, DADA2ErrorStatsDirFmt
 
 
 try:
@@ -16,4 +17,5 @@ except ModuleNotFoundError:
     __version__ = '0.0.0+notfound'
 
 __all__ = ['denoise_single', 'denoise_paired', 'denoise_pyro', 'denoise_ccs',
-           'DADA2Stats', 'DADA2StatsFormat', 'DADA2StatsDirFmt']
+           'DADA2Stats', 'DADA2StatsFormat', 'DADA2StatsDirFmt',
+           'DADA2ErrorStats', 'DADA2ErrorStatsFormat', 'DADA2ErrorStatsDirFmt']

@@ -195,8 +195,7 @@ def _denoise_helper(biom_fp, track_fp, err_track_fp,
              for id_ in table.ids(axis='observation')))
 
     # initalize and populate DADA2 diagnoistic Stats dictionary
-    return table, rep_sequences, {"denoised-read-stats": metadata,
-                                  "error-plot-stats": metadata_err}
+    return table, rep_sequences, metadata, metadata_err
 
 
 def _denoise_single(demultiplexed_seqs, trunc_len, trim_left, max_ee, trunc_q,
@@ -264,7 +263,8 @@ def denoise_single(demultiplexed_seqs: SingleLanePerSampleSingleEndFastqDirFmt,
                    n_threads: int = 1, n_reads_learn: int = 1000000,
                    hashed_feature_ids: bool = True,
                    retain_all_samples: bool = True
-                   ) -> (biom.Table, DNAIterator, qiime2.Metadata):
+                   ) -> (biom.Table, DNAIterator,
+                         qiime2.Metadata, qiime2.Metadata):
     return _denoise_single(
         demultiplexed_seqs=demultiplexed_seqs,
         trunc_len=trunc_len,
@@ -296,7 +296,8 @@ def denoise_paired(demultiplexed_seqs: SingleLanePerSamplePairedEndFastqDirFmt,
                    n_threads: int = 1, n_reads_learn: int = 1000000,
                    hashed_feature_ids: bool = True,
                    retain_all_samples: bool = True
-                   ) -> (biom.Table, DNAIterator, qiime2.Metadata):
+                   ) -> (biom.Table, DNAIterator,
+                         qiime2.Metadata, qiime2.Metadata):
     _check_inputs(**locals())
     if trunc_len_f != 0 and trim_left_f >= trunc_len_f:
         raise ValueError("trim_left_f (%r) must be smaller than trunc_len_f"
@@ -393,7 +394,8 @@ def denoise_pyro(demultiplexed_seqs: SingleLanePerSampleSingleEndFastqDirFmt,
                  n_threads: int = 1, n_reads_learn: int = 250000,
                  hashed_feature_ids: bool = True,
                  retain_all_samples: bool = True
-                 ) -> (biom.Table, DNAIterator, qiime2.Metadata):
+                 ) -> (biom.Table, DNAIterator,
+                       qiime2.Metadata, qiime2.Metadata):
     return _denoise_single(
         demultiplexed_seqs=demultiplexed_seqs,
         trunc_len=trunc_len,
@@ -425,7 +427,8 @@ def denoise_ccs(demultiplexed_seqs: SingleLanePerSampleSingleEndFastqDirFmt,
                 n_threads: int = 1, n_reads_learn: int = 1000000,
                 hashed_feature_ids: bool = True,
                 retain_all_samples: bool = True
-                ) -> (biom.Table, DNAIterator, qiime2.Metadata):
+                ) -> (biom.Table, DNAIterator,
+                      qiime2.Metadata, qiime2.Metadata):
     _check_inputs(**locals())
     if trunc_len != 0 and trim_left >= trunc_len:
         raise ValueError("trim_left (%r) must be smaller than trunc_len (%r)"

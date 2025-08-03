@@ -31,5 +31,5 @@ class DADA2ErrorStatsFormat(model.TextFileFormat):
         pass
 
 
-DADA2StatsDirFmt = model.SingleFileDirectoryFormat(
-    'DADA2StatsDirFmt', 'stats.tsv', DADA2ErrorStatsFormat)
+DADA2ErrorStatsDirFmt = model.SingleFileDirectoryFormat(
+    'DADA2ErrorStatsDirFmt', 'Errorstats.tsv', DADA2ErrorStatsFormat)

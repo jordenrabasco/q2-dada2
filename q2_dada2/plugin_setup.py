@@ -16,7 +16,8 @@ from q2_types.feature_table import FeatureTable, Frequency
 
 import q2_dada2
 from q2_dada2 import DADA2Stats, DADA2StatsFormat, DADA2StatsDirFmt, \
-                     DADA2ErrorStats, DADA2ErrorStatsFormat
+                     DADA2ErrorStats, DADA2ErrorStatsFormat, \
+                     DADA2ErrorStatsDirFmt
 import q2_dada2._examples as ex
 from ._dada_stats import (stats_viz)
 
@@ -57,9 +58,8 @@ plugin.methods.register_function(
                 'retain_all_samples': qiime2.plugin.Bool},
     outputs=[('table', FeatureTable[Frequency]),
              ('representative_sequences', FeatureData[Sequence]),
-             ('denoising_stats',
-              qiime2.plugin.Collection[SampleData[DADA2Stats],
-                                       SampleData[DADA2ErrorStats]])],
+             ('denoising_read_stats', SampleData[DADA2Stats]),
+             ('denoising_error_stats', SampleData[DADA2ErrorStats])],
     input_descriptions={
         'demultiplexed_seqs': ('The single-end demultiplexed sequences to be '
                                'denoised.')
@@ -134,7 +134,10 @@ plugin.methods.register_function(
         'table': 'The resulting feature table.',
         'representative_sequences': ('The resulting feature sequences. Each '
                                      'feature in the feature table will be '
-                                     'represented by exactly one sequence.')
+                                     'represented by exactly one sequence.'),
+        'denoising_read_stats': 'read stats output',
+        'denoising_error_stats': 'read error graph'
+
     },
     name='Denoise and dereplicate single-end sequences',
     description=('This method denoises single-end sequences, dereplicates '
@@ -169,9 +172,8 @@ plugin.methods.register_function(
                 'retain_all_samples': qiime2.plugin.Bool},
     outputs=[('table', FeatureTable[Frequency]),
              ('representative_sequences', FeatureData[Sequence]),
-             ('denoising_stats',
-              qiime2.plugin.Collection[SampleData[DADA2Stats],
-                                       SampleData[DADA2ErrorStats]])],
+             ('denoising_read_stats', SampleData[DADA2Stats]),
+             ('denoising_error_stats', SampleData[DADA2ErrorStats])],
     input_descriptions={
         'demultiplexed_seqs': ('The paired-end demultiplexed sequences to be '
                                'denoised.')
@@ -269,7 +271,9 @@ plugin.methods.register_function(
                                      'feature in the feature table will be '
                                      'represented by exactly one sequence, '
                                      'and these sequences will be the joined '
-                                     'paired-end sequences.')
+                                     'paired-end sequences.'),
+        'denoising_read_stats': 'read stats output',
+        'denoising_error_stats': 'read error graph'
     },
     name='Denoise and dereplicate paired-end sequences',
     description=('This method denoises paired-end sequences, dereplicates '
@@ -300,9 +304,8 @@ plugin.methods.register_function(
                 'retain_all_samples': qiime2.plugin.Bool},
     outputs=[('table', FeatureTable[Frequency]),
              ('representative_sequences', FeatureData[Sequence]),
-             ('denoising_stats',
-              qiime2.plugin.Collection[SampleData[DADA2Stats],
-                                       SampleData[DADA2ErrorStats]])],
+             ('denoising_read_stats', SampleData[DADA2Stats]),
+             ('denoising_error_stats', SampleData[DADA2ErrorStats])],
     input_descriptions={
         'demultiplexed_seqs': 'The single-end demultiplexed pyrosequencing '
                               'sequences (e.g. 454, IonTorrent) to be '
@@ -379,7 +382,9 @@ plugin.methods.register_function(
         'table': 'The resulting feature table.',
         'representative_sequences': 'The resulting feature sequences. Each '
                                     'feature in the feature table will be '
-                                    'represented by exactly one sequence.'
+                                    'represented by exactly one sequence.',
+        'denoising_read_stats': 'read stats output',
+        'denoising_error_stats': 'read error graph'
     },
     name='Denoise and dereplicate single-end pyrosequences',
     description='This method denoises single-end pyrosequencing sequences, '
@@ -410,9 +415,8 @@ plugin.methods.register_function(
                 'retain_all_samples': qiime2.plugin.Bool},
     outputs=[('table', FeatureTable[Frequency]),
              ('representative_sequences', FeatureData[Sequence]),
-             ('denoising_stats',
-              qiime2.plugin.Collection[SampleData[DADA2Stats],
-                                       SampleData[DADA2ErrorStats]])],
+             ('denoising_read_stats', SampleData[DADA2Stats]),
+             ('denoising_error_stats', SampleData[DADA2ErrorStats])],
     input_descriptions={
         'demultiplexed_seqs': 'The single-end demultiplexed PacBio CCS '
                               'sequences to be denoised.'
@@ -515,7 +519,9 @@ plugin.methods.register_function(
         'table': 'The resulting feature table.',
         'representative_sequences': 'The resulting feature sequences. Each '
                                     'feature in the feature table will be '
-                                    'represented by exactly one sequence.'
+                                    'represented by exactly one sequence.',
+        'denoising_read_stats': 'read stats output',
+        'denoising_error_stats': 'read error graph'
     },
     name='Denoise and dereplicate single-end Pacbio CCS',
     description='This method denoises single-end Pacbio CCS sequences, '
@@ -550,8 +556,9 @@ plugin.register_formats(DADA2StatsFormat, DADA2StatsDirFmt)
 plugin.register_semantic_types(DADA2Stats)
 plugin.register_semantic_type_to_format(
     SampleData[DADA2Stats], DADA2StatsDirFmt)
-plugin.register_formats(DADA2ErrorStatsFormat, DADA2StatsDirFmt)
+
+plugin.register_formats(DADA2ErrorStatsFormat, DADA2ErrorStatsDirFmt)
 plugin.register_semantic_types(DADA2ErrorStats)
 plugin.register_semantic_type_to_format(
-    SampleData[DADA2ErrorStats], DADA2StatsDirFmt)
+    SampleData[DADA2ErrorStats], DADA2ErrorStatsDirFmt)
 importlib.import_module('q2_dada2._transformer')
