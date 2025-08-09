@@ -21,6 +21,12 @@ from q2_dada2 import DADA2Stats, DADA2StatsFormat, DADA2StatsDirFmt, \
 import q2_dada2._examples as ex
 from ._dada_stats import (stats_viz)
 
+read_denoising_desc = 'standard dada2 read retention table; ' \
+    'visualize via "qiime metadata tabulate"'
+
+error_denoising_desc = 'read transition error table; visualize ' \
+    'via "qiime dada2 stats-viz"'
+
 _POOL_OPT = {'pseudo', 'independent'}
 _CHIM_OPT = {'consensus', 'none'}
 
@@ -135,8 +141,8 @@ plugin.methods.register_function(
         'representative_sequences': ('The resulting feature sequences. Each '
                                      'feature in the feature table will be '
                                      'represented by exactly one sequence.'),
-        'denoising_read_stats': 'read stats output',
-        'denoising_error_stats': 'read error graph'
+        'denoising_read_stats': read_denoising_desc,
+        'denoising_error_stats': error_denoising_desc
 
     },
     name='Denoise and dereplicate single-end sequences',
@@ -272,8 +278,8 @@ plugin.methods.register_function(
                                      'represented by exactly one sequence, '
                                      'and these sequences will be the joined '
                                      'paired-end sequences.'),
-        'denoising_read_stats': 'read stats output',
-        'denoising_error_stats': 'read error graph'
+        'denoising_read_stats': read_denoising_desc,
+        'denoising_error_stats': error_denoising_desc
     },
     name='Denoise and dereplicate paired-end sequences',
     description=('This method denoises paired-end sequences, dereplicates '
@@ -383,8 +389,8 @@ plugin.methods.register_function(
         'representative_sequences': 'The resulting feature sequences. Each '
                                     'feature in the feature table will be '
                                     'represented by exactly one sequence.',
-        'denoising_read_stats': 'read stats output',
-        'denoising_error_stats': 'read error graph'
+        'denoising_read_stats': read_denoising_desc,
+        'denoising_error_stats': error_denoising_desc
     },
     name='Denoise and dereplicate single-end pyrosequences',
     description='This method denoises single-end pyrosequencing sequences, '
@@ -520,8 +526,8 @@ plugin.methods.register_function(
         'representative_sequences': 'The resulting feature sequences. Each '
                                     'feature in the feature table will be '
                                     'represented by exactly one sequence.',
-        'denoising_read_stats': 'read stats output',
-        'denoising_error_stats': 'read error graph'
+        'denoising_read_stats': read_denoising_desc,
+        'denoising_error_stats': error_denoising_desc
     },
     name='Denoise and dereplicate single-end Pacbio CCS',
     description='This method denoises single-end Pacbio CCS sequences, '
