@@ -6,11 +6,13 @@
 # The full license is in the file LICENSE, distributed with this software.
 # ----------------------------------------------------------------------------
 
+import os
 import unittest
 import tempfile
 import pandas as pd
 import skbio
 import biom
+
 import qiime2
 from qiime2.plugin.testing import TestPluginBase
 from q2_types.per_sample_sequences import (
@@ -19,8 +21,7 @@ from q2_types.per_sample_sequences import (
 
 from q2_dada2 import denoise_single, denoise_paired, denoise_pyro, denoise_ccs
 from q2_dada2._denoise import _check_featureless_table
-from q2_dada2._dada_stats._visualizer import (stats_viz)
-import os
+from q2_dada2._dada_stats._visualizer import plot_base_transitions
 
 
 def _sort_seqs(seqs):
@@ -547,13 +548,16 @@ class TestVizualization(TestPluginBase):
                     os.path.join(viz_dir, 'Forward_error_graph.png')))
 
     def test_defaults(self):
-        stats_viz(output_dir=self.output_dir,
-                  dada2_error_stats=self.stats_table)
+        plot_base_transitions(
+            output_dir=self.output_dir, base_transition_stats=self.stats_table
+        )
         self.assertStat_Viz_Basics(self.output_dir, True)
 
     def test_paired_defaults(self):
-        stats_viz(output_dir=self.output_dir,
-                  dada2_error_stats=self.paired_stats_table)
+        plot_base_transitions(
+            output_dir=self.output_dir,
+            base_transition_stats=self.paired_stats_table
+        )
         self.assertStat_Viz_Basics(self.output_dir, False)
 
 

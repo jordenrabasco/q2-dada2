@@ -20,7 +20,7 @@ from q2_dada2 import (
     DADA2BaseTransitionStatsFormat, DADA2BaseTransitionStatsDirFmt
 )
 import q2_dada2._examples as ex
-from ._dada_stats import (stats_viz)
+from ._dada_stats import plot_base_transitions
 
 _POOL_OPT = {'pseudo', 'independent'}
 _CHIM_OPT = {'consensus', 'none'}
@@ -541,9 +541,9 @@ plugin.methods.register_function(
 )
 
 plugin.visualizers.register_function(
-    function=stats_viz,
+    function=plot_base_transitions,
     inputs={
-        'dada2_error_stats': DADA2BaseTransitionStats
+        'base_transition_stats': DADA2BaseTransitionStats
     },
     parameters={
         'nominalq': qiime2.plugin.Bool,
@@ -553,7 +553,7 @@ plugin.visualizers.register_function(
     name='DADA2 diagnostic statistics',
     description='Generates dada2 output stat vizualizations',
     input_descriptions={
-        'dada2_error_stats': 'Error output from stats from dada2 denoising ',
+        'base_transition_stats': 'Dada2 Base transition statistics.',
     },
     parameter_descriptions={
         'nominalq': 'Sets the nominalq line of the vizualization',
