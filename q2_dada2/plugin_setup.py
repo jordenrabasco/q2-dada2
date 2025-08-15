@@ -15,9 +15,10 @@ from q2_types.feature_data import FeatureData, Sequence
 from q2_types.feature_table import FeatureTable, Frequency
 
 import q2_dada2
-from q2_dada2 import DADA2Stats, DADA2StatsFormat, DADA2StatsDirFmt, \
-                     DADA2ErrorStats, DADA2ErrorStatsFormat, \
-                     DADA2ErrorStatsDirFmt
+from q2_dada2 import (
+    DADA2Stats, DADA2StatsFormat, DADA2StatsDirFmt, DADA2BaseTransitionStats,
+    DADA2BaseTransitionStatsFormat, DADA2BaseTransitionStatsDirFmt
+)
 import q2_dada2._examples as ex
 from ._dada_stats import (stats_viz)
 
@@ -67,7 +68,7 @@ plugin.methods.register_function(
     outputs=[('table', FeatureTable[Frequency]),
              ('representative_sequences', FeatureData[Sequence]),
              ('denoising_stats', SampleData[DADA2Stats]),
-             ('base_transition_stats', SampleData[DADA2ErrorStats])],
+             ('base_transition_stats', DADA2BaseTransitionStats)],
     input_descriptions={
         'demultiplexed_seqs': ('The single-end demultiplexed sequences to be '
                                'denoised.')
@@ -181,7 +182,7 @@ plugin.methods.register_function(
     outputs=[('table', FeatureTable[Frequency]),
              ('representative_sequences', FeatureData[Sequence]),
              ('denoising_stats', SampleData[DADA2Stats]),
-             ('base_transition_stats', SampleData[DADA2ErrorStats])],
+             ('base_transition_stats', DADA2BaseTransitionStats)],
     input_descriptions={
         'demultiplexed_seqs': ('The paired-end demultiplexed sequences to be '
                                'denoised.')
@@ -313,7 +314,7 @@ plugin.methods.register_function(
     outputs=[('table', FeatureTable[Frequency]),
              ('representative_sequences', FeatureData[Sequence]),
              ('denoising_stats', SampleData[DADA2Stats]),
-             ('base_transition_stats', SampleData[DADA2ErrorStats])],
+             ('base_transition_stats', DADA2BaseTransitionStats)],
     input_descriptions={
         'demultiplexed_seqs': 'The single-end demultiplexed pyrosequencing '
                               'sequences (e.g. 454, IonTorrent) to be '
@@ -424,7 +425,7 @@ plugin.methods.register_function(
     outputs=[('table', FeatureTable[Frequency]),
              ('representative_sequences', FeatureData[Sequence]),
              ('denoising_stats', SampleData[DADA2Stats]),
-             ('base_transition_stats', SampleData[DADA2ErrorStats])],
+             ('base_transition_stats', DADA2BaseTransitionStats)],
     input_descriptions={
         'demultiplexed_seqs': 'The single-end demultiplexed PacBio CCS '
                               'sequences to be denoised.'
@@ -542,7 +543,7 @@ plugin.methods.register_function(
 plugin.visualizers.register_function(
     function=stats_viz,
     inputs={
-        'dada2_error_stats': SampleData[DADA2ErrorStats]
+        'dada2_error_stats': DADA2BaseTransitionStats
     },
     parameters={
         'nominalq': qiime2.plugin.Bool,
@@ -564,10 +565,14 @@ plugin.visualizers.register_function(
 plugin.register_formats(DADA2StatsFormat, DADA2StatsDirFmt)
 plugin.register_semantic_types(DADA2Stats)
 plugin.register_semantic_type_to_format(
-    SampleData[DADA2Stats], DADA2StatsDirFmt)
+    SampleData[DADA2Stats], DADA2StatsDirFmt
+)
 
-plugin.register_formats(DADA2ErrorStatsFormat, DADA2ErrorStatsDirFmt)
-plugin.register_semantic_types(DADA2ErrorStats)
+plugin.register_formats(
+    DADA2BaseTransitionStatsFormat, DADA2BaseTransitionStatsDirFmt
+)
+plugin.register_semantic_types(DADA2BaseTransitionStats)
 plugin.register_semantic_type_to_format(
-    SampleData[DADA2ErrorStats], DADA2ErrorStatsDirFmt)
+    DADA2BaseTransitionStats, DADA2BaseTransitionStatsDirFmt
+)
 importlib.import_module('q2_dada2._transformer')
